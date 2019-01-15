@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.wujie.commonmoudle.BaseApplication;
 import com.wujie.commonmoudle.base.BaseFragment;
 import com.wujie.commonmoudle.presenter.BasePresenter;
 import com.wujie.commonmoudle.utils.ARouterUtils;

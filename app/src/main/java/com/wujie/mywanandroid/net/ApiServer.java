@@ -8,6 +8,8 @@ import com.wujie.mywanandroid.bean.HomeBean;
 import com.wujie.mywanandroid.bean.HttpsRequest;
 import com.wujie.mywanandroid.bean.KnowledgeBean;
 import com.wujie.mywanandroid.bean.PageListDataBean;
+import com.wujie.mywanandroid.bean.ProjectItemBean;
+import com.wujie.mywanandroid.bean.ProjectTypeBean;
 
 import java.util.List;
 
@@ -18,6 +20,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by HuangBin on 2018/11/15 10:44.
@@ -53,4 +56,10 @@ public interface ApiServer {
 
     @GET("tree/json")
     Observable<BaseBean<List<KnowledgeBean>>> getKnowledge();
+
+    @GET("project/tree/json")
+    Observable<BaseBean<List<ProjectTypeBean>>> getProjectType();
+
+    @GET("project/list/1/json")
+    Observable<BaseBean<PageListDataBean<ProjectItemBean>>> getProjectList(@Query("cid") int cid);
 }

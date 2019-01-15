@@ -1,6 +1,5 @@
 package com.wujie.mywanandroid.ui.activity;
 
-import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.FrameLayout;
@@ -10,7 +9,7 @@ import android.widget.RadioGroup;
 import com.wujie.commonmoudle.base.BaseActivity;
 import com.wujie.commonmoudle.presenter.BasePresenter;
 import com.wujie.mywanandroid.R;
-import com.wujie.mywanandroid.ui.fragment.ProjectFragment;
+import com.wujie.mywanandroid.ui.fragment.project.ProjectFragment;
 import com.wujie.mywanandroid.ui.fragment.home.HomeFragment;
 import com.wujie.mywanandroid.ui.fragment.knowledge.KnowledgeFragment;
 import com.wujie.mywanandroid.ui.fragment.MineFragment;

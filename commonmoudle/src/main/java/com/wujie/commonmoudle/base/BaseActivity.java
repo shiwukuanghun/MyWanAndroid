@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import com.gyf.barlibrary.ImmersionBar;
+import com.gyf.barlibrary.OSUtils;
 import com.wujie.commonmoudle.R;
 import com.wujie.commonmoudle.presenter.BasePresenter;
 import com.wujie.commonmoudle.view.IBaseView;
@@ -26,12 +27,13 @@ public abstract class BaseActivity<P extends BasePresenter<V>, V extends IBaseVi
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         ButterKnife.bind(this);
-        setSwipeBackEnable(true);
+//        setSwipeBackEnable(true);
         mPresenter = createPresenter();
         if (null != mPresenter) {
             mPresenter.attachView((V) this);
         }
         ImmersionBar.with(this).statusBarColor(R.color.yellow).init();
+//        ImmersionBar.with(this).init();
         init();
     }
 

@@ -6,6 +6,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.gyf.barlibrary.ImmersionBar;
 import com.wujie.commonmoudle.base.BaseActivity;
 import com.wujie.commonmoudle.utils.ARouterUtils;
 import com.wujie.mywanandroid.R;
@@ -39,7 +40,14 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginContact.Vie
 
     @Override
     protected void init() {
-
+//        initStatusBar(true, R.color.blue);
+        ImmersionBar.with(this)
+                .transparentStatusBar()
+                .statusBarView(R.id.view)
+//                .titleBar(R.id.toolbar)
+//                .statusBarColor(R.color.blue)
+                .navigationBarColor(R.color.yellow)
+                .init();
     }
 
     @Override

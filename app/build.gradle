@@ -1,6 +1,20 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        debug {
+            keyAlias 'mywan'
+            keyPassword '123456'
+            storeFile file('mywan.jks')
+            storePassword '123456'
+        }
+        release {
+            keyAlias 'mywan'
+            keyPassword '123456'
+            storeFile file('mywan.jks')
+            storePassword '123456'
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.wujie.mywanandroid"
@@ -20,14 +34,19 @@ android {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            debuggable false
+        }
+        debug {
+            signingConfig signingConfigs.debug
+            minifyEnabled false
+            debuggable true
         }
     }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
 }
 
 dependencies {
@@ -37,7 +56,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
     implementation project(':commonmoudle')

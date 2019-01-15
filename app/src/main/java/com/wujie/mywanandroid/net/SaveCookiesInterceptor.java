@@ -1,5 +1,6 @@
 package com.wujie.mywanandroid.net;
 
+import com.wujie.commonmoudle.utils.Constant;
 import com.wujie.commonmoudle.utils.SpUtils;
 
 import java.io.IOException;
@@ -25,7 +26,8 @@ public class SaveCookiesInterceptor implements Interceptor {
                 //注意Cookie请求头字段中的每个Cookie之间用逗号或分号分隔
                 sb.append(cookie).append(",");
             }
-            SpUtils.put(response.request().url().host(), sb.toString());
+//            SpUtils.put(response.request().url().host(), sb.toString());
+            SpUtils.put(Constant.LoginInfo, sb.toString());
 //            Log.e(SaveCookieInterceptor.class.getSimpleName(), "intercept: url : " + request.url());
         }
         return response;

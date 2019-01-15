@@ -2,6 +2,7 @@ package com.wujie.mywanandroid.net;
 
 import android.text.TextUtils;
 
+import com.wujie.commonmoudle.utils.Constant;
 import com.wujie.commonmoudle.utils.SpUtils;
 
 import java.io.IOException;
@@ -19,7 +20,8 @@ public class ReadCookiesInterceptor implements Interceptor {
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request.Builder builder = chain.request().newBuilder();
-        String mCookieStr = (String) SpUtils.get(chain.request().url().host(), "");
+//        String mCookieStr = (String) SpUtils.get(chain.request().url().host(), "");
+        String mCookieStr = (String) SpUtils.get(Constant.LoginInfo, "");
         if (!TextUtils.isEmpty(mCookieStr)) {
             builder.addHeader("Cookie", mCookieStr.substring(0, mCookieStr.length() - 1));//长度减1为了去除最后的逗号
         }

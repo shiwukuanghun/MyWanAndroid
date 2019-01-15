@@ -82,6 +82,26 @@ public class RxHelper {
         };
     }
 
+    public static <T> ObservableTransformer<BaseBean<T>, T> handleLogoutResult() {
+        return new ObservableTransformer<BaseBean<T>, T>() {
+            @Override
+            public ObservableSource<T> apply(Observable<BaseBean<T>> upstream) {
+                return upstream.flatMap(new Function<BaseBean<T>, ObservableSource<T>>() {
+                    @Override
+                    public ObservableSource<T> apply(BaseBean<T> tBaseBean) throws Exception {
+                        if (tBaseBean.getErrorCode() == NetConfig.REQUEST_SUCCESS) {
+                            Object o = new Object();
+                            tBaseBean.setData((T) o);
+                            return createData(tBaseBean.getData());
+                        } else {
+                            return Observable.error(new OtherException(tBaseBean.getErrorCode(), tBaseBean.getErrorMsg()));
+                        }
+                    }
+                });
+            }
+        };
+    }
+
     public static <T> Observable<T> createData(T t) {
         return Observable.create(new ObservableOnSubscribe<T>() {
             @Override

@@ -39,18 +39,18 @@ public abstract class BaseObserver<T> extends ResourceObserver<T> {
     @Override
     public void onError(Throwable e) {
         if(!TextUtils.isEmpty(errorMsg)){
-            Toast.makeText(BaseApplication.getBaseApplication(), errorMsg, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(BaseApplication.getBaseApplication(), errorMsg, Toast.LENGTH_SHORT).show();
             onFailure(-1, errorMsg);
         }/*else if(e instanceof ApiException){
             Toast.makeText(mContext, ((ApiException) e).getMsg(), Toast.LENGTH_SHORT).show();
         }*/else if(e instanceof HttpException){
-            Toast.makeText(BaseApplication.getBaseApplication(), "网络异常", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(BaseApplication.getBaseApplication(), "网络异常", Toast.LENGTH_SHORT).show();
             onFailure(-1, "网络异常");
         }else if (e instanceof OtherException) {
             Toast.makeText(BaseApplication.getBaseApplication(), e.getMessage(), Toast.LENGTH_SHORT).show();
             onFailure(((OtherException) e).getErrorCode(), e.getMessage());
         }else {
-            Toast.makeText(BaseApplication.getBaseApplication(), "未知错误", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(BaseApplication.getBaseApplication(), "未知错误", Toast.LENGTH_SHORT).show();
             onFailure(-1, "未知错误");
         }
     }

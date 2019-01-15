@@ -12,7 +12,7 @@ import com.wujie.mywanandroid.R;
 import com.wujie.mywanandroid.ui.fragment.project.ProjectFragment;
 import com.wujie.mywanandroid.ui.fragment.home.HomeFragment;
 import com.wujie.mywanandroid.ui.fragment.knowledge.KnowledgeFragment;
-import com.wujie.mywanandroid.ui.fragment.MineFragment;
+import com.wujie.mywanandroid.ui.fragment.mine.MineFragment;
 import com.wujie.mywanandroid.ui.fragment.NavigationFragment;
 
 import butterknife.BindView;

@@ -10,4 +10,6 @@ public class Constant {
     public static String BaseUrl = "http://www.wanandroid.com";
     public static String BaseUrl2 = "https://uat.cocopk.com/sjmm/api/";
 
+    public static final String LoginInfo = "LoginInfo";
+
 }

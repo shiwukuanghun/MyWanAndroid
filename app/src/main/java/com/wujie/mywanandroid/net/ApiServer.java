@@ -35,9 +35,14 @@ public interface ApiServer {
     @GET("banner/json")
     Observable<BaseBean<List<BannerBean>>> getBanner();
 
+    //登录
     @POST("user/login")
     @FormUrlEncoded
     Observable<BaseBean<Object>> login(@Field("username") String username, @Field("password") String password);
+
+    @GET("user/logout/json")
+    Observable<BaseBean<Object>> logout();
+
 //Latitude=39.922705&Longitude=116.416636&start=0&productName=华为&limit=10
     @POST("shop/queryNearShop")
     Observable<Object> getResult(@Body HttpsRequest httpsRequest);

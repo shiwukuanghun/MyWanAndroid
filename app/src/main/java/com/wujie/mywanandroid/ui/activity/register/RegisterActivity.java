@@ -6,6 +6,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.gyf.barlibrary.ImmersionBar;
 import com.wujie.commonmoudle.base.BaseActivity;
 import com.wujie.commonmoudle.presenter.BasePresenter;
 import com.wujie.commonmoudle.utils.ARouterUtils;
@@ -43,7 +44,10 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter, RegisterCo
 
     @Override
     protected void init() {
-
+        ImmersionBar.with(this)
+                .transparentStatusBar()
+                .statusBarView(R.id.view)
+                .init();
     }
 
     @OnClick(R.id.btn_register)

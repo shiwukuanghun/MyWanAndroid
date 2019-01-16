@@ -47,7 +47,7 @@ public class MineFragment extends BaseFragment<MinePresenter, MineContact.View> 
         return new MinePresenter();
     }
 
-    @OnClick({R.id.btn_login, R.id.btn_register, R.id.btn_logout})
+    @OnClick({R.id.btn_login, R.id.btn_register, R.id.btn_logout, R.id.btn_setting})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_login:
@@ -58,6 +58,8 @@ public class MineFragment extends BaseFragment<MinePresenter, MineContact.View> 
                 break;
             case R.id.btn_logout:
                 mPresenter.logout();
+                break;
+            case R.id.btn_setting:
                 break;
         }
     }

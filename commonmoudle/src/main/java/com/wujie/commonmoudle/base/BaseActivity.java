@@ -1,8 +1,11 @@
 package com.wujie.commonmoudle.base;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
+import android.widget.TextView;
 
 import com.gyf.barlibrary.ImmersionBar;
 import com.gyf.barlibrary.OSUtils;
@@ -21,6 +24,7 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 public abstract class BaseActivity<P extends BasePresenter<V>, V extends IBaseView> extends SwipeBackActivity implements IBaseView  {
 
     protected P mPresenter;
+    protected Context mContext;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,6 +32,7 @@ public abstract class BaseActivity<P extends BasePresenter<V>, V extends IBaseVi
         setContentView(getLayoutId());
         ButterKnife.bind(this);
 //        setSwipeBackEnable(true);
+        mContext = this;
         mPresenter = createPresenter();
         if (null != mPresenter) {
             mPresenter.attachView((V) this);
@@ -84,5 +89,13 @@ public abstract class BaseActivity<P extends BasePresenter<V>, V extends IBaseVi
     @Override
     public void showEmpty() {
 
+    }
+
+    protected boolean isEmpty(TextView textView) {
+        return TextUtils.isEmpty(textView.getText().toString().trim());
+    }
+
+    protected String getText(TextView textView) {
+        return textView.getText().toString().trim();
     }
 }

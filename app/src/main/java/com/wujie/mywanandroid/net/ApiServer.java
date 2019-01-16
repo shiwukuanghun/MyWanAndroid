@@ -43,6 +43,10 @@ public interface ApiServer {
     @GET("user/logout/json")
     Observable<BaseBean<Object>> logout();
 
+    @POST("user/register")
+    @FormUrlEncoded
+    Observable<BaseBean<Object>> register(@Field("username") String username, @Field("password") String password, @Field("repassword") String repassword);
+
 //Latitude=39.922705&Longitude=116.416636&start=0&productName=华为&limit=10
     @POST("shop/queryNearShop")
     Observable<Object> getResult(@Body HttpsRequest httpsRequest);

@@ -8,9 +8,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.wujie.commonmoudle.BaseApplication;
 import com.wujie.commonmoudle.base.BaseFragment;
-import com.wujie.commonmoudle.presenter.BasePresenter;
 import com.wujie.commonmoudle.utils.ARouterUtils;
 import com.wujie.commonmoudle.utils.Constant;
 import com.wujie.commonmoudle.utils.SpUtils;
@@ -29,11 +27,10 @@ import butterknife.Unbinder;
 public class MineFragment extends BaseFragment<MinePresenter, MineContact.View> implements MineContact.View {
     @BindView(R.id.btn_login)
     Button mBtnLogin;
-    Unbinder unbinder;
-    Unbinder unbinder1;
     @BindView(R.id.btn_logout)
     Button mBtnLogout;
-    Unbinder unbinder2;
+    @BindView(R.id.btn_register)
+    Button mBtnRegister;
 
     @Override
     protected int getLayoutId() {
@@ -50,11 +47,14 @@ public class MineFragment extends BaseFragment<MinePresenter, MineContact.View> 
         return new MinePresenter();
     }
 
-    @OnClick({R.id.btn_login, R.id.btn_logout})
+    @OnClick({R.id.btn_login, R.id.btn_register, R.id.btn_logout})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_login:
                 ARouter.getInstance().build(ARouterUtils.LoginPath).navigation();
+                break;
+            case R.id.btn_register:
+                ARouter.getInstance().build(ARouterUtils.RegisterPath).navigation();
                 break;
             case R.id.btn_logout:
                 mPresenter.logout();
@@ -67,4 +67,5 @@ public class MineFragment extends BaseFragment<MinePresenter, MineContact.View> 
         Toast.makeText(getContext(), "退出成功", Toast.LENGTH_SHORT).show();
         SpUtils.remove(Constant.LoginInfo);
     }
+
 }

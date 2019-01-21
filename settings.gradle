@@ -1,1 +1,1 @@
-include ':app', ':commonmoudle'
+include ':app', ':commonmoudle', ':xskinloader-lib', ':xskinloader-skin-apk'

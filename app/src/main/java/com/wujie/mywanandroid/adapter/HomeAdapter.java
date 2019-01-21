@@ -2,9 +2,11 @@ package com.wujie.mywanandroid.adapter;
 
 import android.support.annotation.Nullable;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.wind.me.xskinloader.SkinManager;
 import com.wujie.mywanandroid.R;
 import com.wujie.mywanandroid.bean.HomeBean;
 
@@ -27,6 +29,7 @@ public class HomeAdapter extends BaseQuickAdapter<HomeBean, BaseViewHolder> {
                 .setText(R.id.tv_type, item.getChapterName())
                 .addOnClickListener(R.id.iv_collect);
         ((ImageView)helper.getView(R.id.iv_collect)).setImageResource(item.isCollect()?R.mipmap.icon_collect_yes:R.mipmap.icon_collect_no);
+//        SkinManager.get().setTextViewColor((TextView)helper.getView(R.id.tv_title), R.color.colorPrimary);
     }
 
 }

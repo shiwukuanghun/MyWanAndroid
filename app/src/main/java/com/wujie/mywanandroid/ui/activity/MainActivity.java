@@ -6,6 +6,8 @@ import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.wind.me.xskinloader.SkinManager;
+import com.wind.me.xskinloader.util.AssetFileUtils;
 import com.wujie.commonmoudle.base.BaseActivity;
 import com.wujie.commonmoudle.presenter.BasePresenter;
 import com.wujie.mywanandroid.R;
@@ -14,6 +16,8 @@ import com.wujie.mywanandroid.ui.fragment.home.HomeFragment;
 import com.wujie.mywanandroid.ui.fragment.knowledge.KnowledgeFragment;
 import com.wujie.mywanandroid.ui.fragment.mine.MineFragment;
 import com.wujie.mywanandroid.ui.fragment.NavigationFragment;
+
+import java.io.File;
 
 import butterknife.BindView;
 
@@ -56,6 +60,10 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
+        if (checkedId == R.id.rb_navigation) {
+            changeSkin();
+            return;
+        }
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         hideAllFragment(transaction);
         switch (checkedId) {
@@ -145,4 +153,15 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         }
     }
 
+    private void changeSkin() {
+        //将assets目录下的皮肤文件拷贝到data/data/.../cache目录下
+        String saveDir = getCacheDir().getAbsolutePath() + "/skins";
+        String savefileName = "/skin1.skin";
+        String asset_dir = "skin/xskinloader-skin-apk-debug.apk";
+        File file = new File(saveDir + File.separator + savefileName);
+//        if (!file.exists()) {
+        AssetFileUtils.copyAssetFile(this, asset_dir, saveDir, savefileName);
+//        }
+        SkinManager.get().loadNewSkin(file.getAbsolutePath());
+    }
 }

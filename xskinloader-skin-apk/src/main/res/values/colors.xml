@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="statusBarColor">#1111FF</color>
+    <color name="myTextColor">#090066</color>
+    <color name="activityBackgroundColor">#FFFFAA</color>
+
+    <color name="colorPrimary">#f2070b</color>
+</resources>

@@ -3,20 +3,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:skin="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/colorPrimary" />
+        skin:enable="true" />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@color/colorPrimary"
-        app:title="结合侧滑返回使用"
+        skin:enable="true"
+        app:title="登录"
         app:titleTextColor="@android:color/white" />
 
 

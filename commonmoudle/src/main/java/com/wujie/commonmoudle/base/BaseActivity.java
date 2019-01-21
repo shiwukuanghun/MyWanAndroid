@@ -9,9 +9,14 @@ import android.widget.TextView;
 
 import com.gyf.barlibrary.ImmersionBar;
 import com.gyf.barlibrary.OSUtils;
+import com.wind.me.xskinloader.SkinInflaterFactory;
+import com.wind.me.xskinloader.SkinManager;
+import com.wind.me.xskinloader.util.AssetFileUtils;
 import com.wujie.commonmoudle.R;
 import com.wujie.commonmoudle.presenter.BasePresenter;
 import com.wujie.commonmoudle.view.IBaseView;
+
+import java.io.File;
 
 import butterknife.ButterKnife;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
@@ -28,6 +33,7 @@ public abstract class BaseActivity<P extends BasePresenter<V>, V extends IBaseVi
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        SkinInflaterFactory.setFactory(this);
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         ButterKnife.bind(this);
@@ -65,6 +71,32 @@ public abstract class BaseActivity<P extends BasePresenter<V>, V extends IBaseVi
         ImmersionBar.with(this).destroy();
     }
 
+    public void useNightMode(boolean isNight) {
+
+        if (isNight) {
+            changeSkin();
+
+        } else {
+
+            restoreDefaultSkin();
+        }
+    }
+
+    private void changeSkin() {
+        //将assets目录下的皮肤文件拷贝到data/data/.../cache目录下
+        String saveDir = getCacheDir().getAbsolutePath() + "/skins";
+        String savefileName = "/skin1.skin";
+        String asset_dir = "skin/xskinloader-skin-apk-debug.apk";
+        File file = new File(saveDir + File.separator + savefileName);
+//        if (!file.exists()) {
+        AssetFileUtils.copyAssetFile(this, asset_dir, saveDir, savefileName);
+//        }
+        SkinManager.get().loadNewSkin(file.getAbsolutePath());
+    }
+
+    private void restoreDefaultSkin() {
+        SkinManager.get().restoreToDefaultSkin();
+    }
 
     @Override
     public void showLoading(String msg) {

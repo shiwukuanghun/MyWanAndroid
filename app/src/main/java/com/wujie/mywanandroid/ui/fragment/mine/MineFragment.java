@@ -60,6 +60,7 @@ public class MineFragment extends BaseFragment<MinePresenter, MineContact.View> 
                 mPresenter.logout();
                 break;
             case R.id.btn_setting:
+                ARouter.getInstance().build(ARouterUtils.SettingPath).navigation();
                 break;
         }
     }

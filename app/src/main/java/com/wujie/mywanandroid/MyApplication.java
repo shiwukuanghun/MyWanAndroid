@@ -1,6 +1,7 @@
 package com.wujie.mywanandroid;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -11,7 +12,10 @@ import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.wind.me.xskinloader.SkinInflaterFactory;
+import com.wind.me.xskinloader.SkinManager;
 import com.wujie.commonmoudle.BaseApplication;
+import com.wujie.commonmoudle.skin.ExtraAttrRegister;
 import com.wujie.commonmoudle.utils.Constant;
 import com.wujie.mywanandroid.R;
 import com.wujie.mywanandroid.net.RxRetrofit;
@@ -32,6 +36,11 @@ public class MyApplication extends BaseApplication {
             ARouter.openDebug();   // 开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
         }
         ARouter.init(this); // 尽可能早，推荐在Application中初始化
+
+        SkinInflaterFactory.setFactory(LayoutInflater.from(this));  // for skin change
+        SkinManager.get().init(this);
+        //扩展换肤属性和style中的换肤属性
+        ExtraAttrRegister.init();
     }
 
     //static 代码段可以防止内存泄露

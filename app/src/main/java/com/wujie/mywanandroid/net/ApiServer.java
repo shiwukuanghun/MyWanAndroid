@@ -2,7 +2,10 @@ package com.wujie.mywanandroid.net;
 
 
 
+import android.support.annotation.Nullable;
+
 import com.wujie.commonmoudle.bean.BaseBean;
+import com.wujie.mywanandroid.bean.AddTodoBean;
 import com.wujie.mywanandroid.bean.BannerBean;
 import com.wujie.mywanandroid.bean.HomeBean;
 import com.wujie.mywanandroid.bean.HttpsRequest;
@@ -40,9 +43,11 @@ public interface ApiServer {
     @FormUrlEncoded
     Observable<BaseBean<Object>> login(@Field("username") String username, @Field("password") String password);
 
+    //退出登录
     @GET("user/logout/json")
     Observable<BaseBean<Object>> logout();
 
+    //注册
     @POST("user/register")
     @FormUrlEncoded
     Observable<BaseBean<Object>> register(@Field("username") String username, @Field("password") String password, @Field("repassword") String repassword);
@@ -71,4 +76,10 @@ public interface ApiServer {
 
     @GET("project/list/1/json")
     Observable<BaseBean<PageListDataBean<ProjectItemBean>>> getProjectList(@Query("cid") int cid);
+
+    //添加TODO
+    @POST("lg/todo/add/json")
+    @FormUrlEncoded
+    Observable<BaseBean<AddTodoBean>> addTodo(@Field("title") String title, @Field("content") String content, @Field("date") String date, @Field("type") int type, @Field("priority") int priority);
+//    Observable<BaseBean<AddTodoBean>> addTodo(@Query("title") String title, @Query("content") String content, @Query("date") String date, @Query("type") int type, @Query("priority") int priority);
 }

@@ -1,6 +1,5 @@
 package com.wujie.mywanandroid.ui.activity.todo;
 
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -10,13 +9,11 @@ import android.widget.Toast;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.gyf.barlibrary.ImmersionBar;
 import com.wujie.commonmoudle.base.BaseActivity;
-import com.wujie.commonmoudle.presenter.BasePresenter;
 import com.wujie.commonmoudle.utils.ARouterUtils;
 import com.wujie.mywanandroid.R;
-import com.wujie.mywanandroid.bean.AddTodoBean;
+import com.wujie.mywanandroid.bean.TodoBean;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -68,7 +65,7 @@ public class AddTodoActivity extends BaseActivity<AddTodoPresenter, AddTodoConta
     }
 
     @Override
-    public void addTodoSuccess(AddTodoBean addTodoBean) {
+    public void addTodoSuccess(TodoBean todoBean) {
         Toast.makeText(mContext, "添加成功", Toast.LENGTH_SHORT).show();
     }
 }

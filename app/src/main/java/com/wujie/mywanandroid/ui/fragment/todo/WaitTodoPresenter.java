@@ -1,32 +1,33 @@
-package com.wujie.mywanandroid.ui.activity.todo;
+package com.wujie.mywanandroid.ui.fragment.todo;
 
 import com.wujie.commonmoudle.net.BaseObserver;
 import com.wujie.commonmoudle.presenter.BasePresenter;
+import com.wujie.mywanandroid.bean.PageListDataBean;
 import com.wujie.mywanandroid.bean.TodoBean;
 import com.wujie.mywanandroid.net.RxHelper;
 import com.wujie.mywanandroid.net.RxRetrofit;
 
 /**
- * Time：2019/1/23 0023 下午 14:42
+ * Time：2019/1/23 0023 下午 15:30
  * Author：WuChen
  * Description：
  **/
-public class AddTodoPresenter extends BasePresenter<AddTodoContact.View> implements AddTodoContact.Presenter {
+public class WaitTodoPresenter extends BasePresenter<WaiteTodoContact.View> implements WaiteTodoContact.Presenter {
     @Override
-    public void addTodo(String title, String content, String date, int type, int priority) {
+    public void getTodoList(int page, int status, int type, int priority, int orderby) {
         addDisposable(RxRetrofit.getApi()
-                .addTodo(title, content, date, type, priority)
+                .getTodoList(page, status, type, priority, orderby)
                 .compose(RxHelper.rxSchedulderHelper())
                 .compose(RxHelper.handleResult2())
-                .subscribeWith(new BaseObserver<TodoBean>() {
+                .subscribeWith(new BaseObserver<PageListDataBean<TodoBean>>() {
                     @Override
                     protected void start() {
 
                     }
 
                     @Override
-                    protected void onSuccess(TodoBean todoBean) {
-                        mV.addTodoSuccess(todoBean);
+                    protected void onSuccess(PageListDataBean<TodoBean> pageListDataBean) {
+                        mV.getTodoListSuccess(pageListDataBean);
                     }
 
                     @Override
@@ -34,5 +35,6 @@ public class AddTodoPresenter extends BasePresenter<AddTodoContact.View> impleme
 
                     }
                 }));
+
     }
 }

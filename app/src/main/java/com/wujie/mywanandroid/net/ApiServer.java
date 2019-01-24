@@ -2,10 +2,8 @@ package com.wujie.mywanandroid.net;
 
 
 
-import android.support.annotation.Nullable;
-
 import com.wujie.commonmoudle.bean.BaseBean;
-import com.wujie.mywanandroid.bean.AddTodoBean;
+import com.wujie.mywanandroid.bean.TodoBean;
 import com.wujie.mywanandroid.bean.BannerBean;
 import com.wujie.mywanandroid.bean.HomeBean;
 import com.wujie.mywanandroid.bean.HttpsRequest;
@@ -80,6 +78,11 @@ public interface ApiServer {
     //添加TODO
     @POST("lg/todo/add/json")
     @FormUrlEncoded
-    Observable<BaseBean<AddTodoBean>> addTodo(@Field("title") String title, @Field("content") String content, @Field("date") String date, @Field("type") int type, @Field("priority") int priority);
-//    Observable<BaseBean<AddTodoBean>> addTodo(@Query("title") String title, @Query("content") String content, @Query("date") String date, @Query("type") int type, @Query("priority") int priority);
+    Observable<BaseBean<TodoBean>> addTodo(@Field("title") String title, @Field("content") String content, @Field("date") String date, @Field("type") int type, @Field("priority") int priority);
+//    Observable<BaseBean<TodoBean>> addTodo(@Query("title") String title, @Query("content") String content, @Query("date") String date, @Query("type") int type, @Query("priority") int priority);
+
+    //TODO列表
+    @POST("lg/todo/v2/list/{page}/json")
+    @FormUrlEncoded
+    Observable<BaseBean<PageListDataBean<TodoBean>>> getTodoList(@Path("page") int page, @Field("status") int status, @Field("type") int type, @Field("priority") int priority, @Field("orderby") int orderby);
 }

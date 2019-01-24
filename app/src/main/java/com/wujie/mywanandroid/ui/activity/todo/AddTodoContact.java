@@ -2,7 +2,7 @@ package com.wujie.mywanandroid.ui.activity.todo;
 
 import com.wujie.commonmoudle.presenter.IPresenter;
 import com.wujie.commonmoudle.view.IBaseView;
-import com.wujie.mywanandroid.bean.AddTodoBean;
+import com.wujie.mywanandroid.bean.TodoBean;
 
 /**
  * Time：2019/1/23 0023 下午 14:31
@@ -12,7 +12,7 @@ import com.wujie.mywanandroid.bean.AddTodoBean;
 public interface AddTodoContact {
 
     interface View extends IBaseView {
-        void addTodoSuccess(AddTodoBean addTodoBean);
+        void addTodoSuccess(TodoBean todoBean);
     }
 
     interface Presenter extends IPresenter<View> {

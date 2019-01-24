@@ -5,7 +5,7 @@ package com.wujie.mywanandroid.bean;
  * Author：WuChen
  * Description：
  **/
-public class AddTodoBean {
+public class TodoBean {
 
 
     /**

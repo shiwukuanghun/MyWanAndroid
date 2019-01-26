@@ -26,7 +26,6 @@ public class KnowledgeFragment extends BaseFragment<KnowledgePresenter, Knowledg
     RecyclerView mRvKnowledge;
     @BindView(R.id.msl)
     SmartRefreshLayout mMsl;
-    Unbinder unbinder;
     private KnowledgeAdapter mKnowledgeAdapter;
 
     @Override

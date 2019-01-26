@@ -34,6 +34,18 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    //解决appcompat版本不一致
+    configurations.all {
+        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+            def requested = details.requested
+            if (requested.group == 'com.android.support') {
+                if (!requested.name.startsWith("multidex")) {
+                    details.useVersion '28.0.0'
+                }
+            }
+        }
+    }
+
 }
 
 dependencies {
@@ -53,8 +65,10 @@ dependencies {
     api 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
     api 'com.squareup.okhttp3:logging-interceptor:3.9.1'
     api 'com.android.support:recyclerview-v7:28.0.0'
+    //butterknife
     api 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    //刷新框架
     api 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-16'
     api 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-16'
     //没有使用特殊Header，可以不加这行
@@ -65,8 +79,10 @@ dependencies {
     api 'com.alibaba:arouter-api:1.4.1'
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
 
+    //适配器
     api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.44'
 
+    //滑动退出
     api 'me.imid.swipebacklayout.lib:library:1.3.0'
 
     //状态栏
@@ -76,4 +92,9 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
 
     api project(':xskinloader-lib')
+
+    api 'q.rorbin:VerticalTabLayout:1.2.5'
+
+    //流式标签布局
+    api 'com.hyman:flowlayout-lib:1.1.2'
 }

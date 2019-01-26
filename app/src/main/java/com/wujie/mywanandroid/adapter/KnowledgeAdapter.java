@@ -22,5 +22,11 @@ public class KnowledgeAdapter extends BaseQuickAdapter<KnowledgeBean, BaseViewHo
     @Override
     protected void convert(BaseViewHolder helper, KnowledgeBean item) {
         helper.setText(R.id.tv_title, item.getName());
+        List<KnowledgeBean.ChildrenBean> children = item.getChildren();
+        String desc="";
+        for (KnowledgeBean.ChildrenBean childrenBean : children){
+            desc += childrenBean.getName() + "   ";
+        }
+        helper.setText(R.id.tv_desc, desc);
     }
 }

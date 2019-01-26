@@ -1,4 +1,13 @@
+import java.text.SimpleDateFormat
+
 apply plugin: 'com.android.application'
+
+//获取系统时间
+def buildTime() {
+    def df = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss")
+    df.setTimeZone(TimeZone.getDefault())
+    return df.format(new Date())
+}
 
 android {
     signingConfigs {
@@ -60,6 +69,25 @@ android {
         }
     }
 
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                def version = "v${versionName}-${versionCode}"
+                def fileName = ""
+                if (variant.buildType.name == "release") {
+//                    fileName = "MyWanAndroid_${version}_${buildTime()}_Release.apk"
+                    fileName = "MyWanAndroid_${version}}_Release.apk"
+                } else if (variant.buildType.name == "debug") {
+//                    fileName = "MyWanAndroid_${version}_${buildTime()}_Debug.apk"
+                    fileName = "MyWanAndroid_${version}}_Debug.apk"
+                }
+                outputFileName = fileName
+
+            }
+        }
+    }
+
 }
 
 dependencies {
@@ -73,3 +101,5 @@ dependencies {
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
     implementation project(':commonmoudle')
 }
+
+

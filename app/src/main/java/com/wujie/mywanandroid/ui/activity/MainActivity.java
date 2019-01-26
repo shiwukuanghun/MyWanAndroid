@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.wind.me.xskinloader.SkinManager;
 import com.wind.me.xskinloader.util.AssetFileUtils;
@@ -15,7 +16,7 @@ import com.wujie.mywanandroid.ui.fragment.project.ProjectFragment;
 import com.wujie.mywanandroid.ui.fragment.home.HomeFragment;
 import com.wujie.mywanandroid.ui.fragment.knowledge.KnowledgeFragment;
 import com.wujie.mywanandroid.ui.fragment.mine.MineFragment;
-import com.wujie.mywanandroid.ui.fragment.NavigationFragment;
+import com.wujie.mywanandroid.ui.fragment.navigation.NavigationFragment;
 
 import java.io.File;
 
@@ -60,10 +61,10 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        if (checkedId == R.id.rb_navigation) {
-            changeSkin();
-            return;
-        }
+//        if (checkedId == R.id.rb_navigation) {
+//            changeSkin();
+//            return;
+//        }
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         hideAllFragment(transaction);
         switch (checkedId) {

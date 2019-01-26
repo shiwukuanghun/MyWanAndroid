@@ -3,6 +3,7 @@ package com.wujie.mywanandroid.net;
 
 
 import com.wujie.commonmoudle.bean.BaseBean;
+import com.wujie.mywanandroid.bean.NavigationBean;
 import com.wujie.mywanandroid.bean.TodoBean;
 import com.wujie.mywanandroid.bean.BannerBean;
 import com.wujie.mywanandroid.bean.HomeBean;
@@ -30,6 +31,7 @@ import retrofit2.http.Query;
 
 public interface ApiServer {
 
+    //首页文章列表
     @GET("article/list/{page}/json")
     Observable<BaseBean<PageListDataBean<HomeBean>>> getHomeList(@Path("page") int page);
 
@@ -85,4 +87,7 @@ public interface ApiServer {
     @POST("lg/todo/v2/list/{page}/json")
     @FormUrlEncoded
     Observable<BaseBean<PageListDataBean<TodoBean>>> getTodoList(@Path("page") int page, @Field("status") int status, @Field("type") int type, @Field("priority") int priority, @Field("orderby") int orderby);
+
+    @GET("navi/json")
+    Observable<BaseBean<List<NavigationBean>>> getNavigation();
 }

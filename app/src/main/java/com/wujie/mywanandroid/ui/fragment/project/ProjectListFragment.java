@@ -7,8 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.android.arouter.launcher.ARouter;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.wujie.commonmoudle.base.BaseFragment;
+import com.wujie.commonmoudle.utils.ARouterUtils;
+import com.wujie.commonmoudle.utils.Constant;
 import com.wujie.mywanandroid.R;
 import com.wujie.mywanandroid.adapter.ProjectListAdapter;
 import com.wujie.mywanandroid.bean.PageListDataBean;
@@ -57,6 +61,11 @@ public class ProjectListFragment extends BaseFragment<ProjectListPresenter, Proj
         mProjectListAdapter = new ProjectListAdapter(R.layout.item_project, projectItemBeans);
         mRvProject.setAdapter(mProjectListAdapter);
         mPresenter.getProjectList(id);
+
+        mProjectListAdapter.setOnItemClickListener((adapter, view1, position) -> {
+            String projectLink = mProjectListAdapter.getData().get(position).getProjectLink();
+            ARouter.getInstance().build(ARouterUtils.WebViewPath).withString(Constant.WebUrl, projectLink).navigation();
+        });
     }
 
     @Override

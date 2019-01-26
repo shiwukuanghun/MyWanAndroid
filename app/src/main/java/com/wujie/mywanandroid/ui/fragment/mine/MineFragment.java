@@ -13,6 +13,7 @@ import com.wujie.commonmoudle.utils.ARouterUtils;
 import com.wujie.commonmoudle.utils.Constant;
 import com.wujie.commonmoudle.utils.SpUtils;
 import com.wujie.mywanandroid.R;
+import com.wujie.mywanandroid.utils.LoginUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -63,6 +64,10 @@ public class MineFragment extends BaseFragment<MinePresenter, MineContact.View> 
                 ARouter.getInstance().build(ARouterUtils.SettingPath).navigation();
                 break;
             case R.id.btn_todo:
+                if (!LoginUtils.isLogin()) {
+                    ARouter.getInstance().build(ARouterUtils.LoginPath).navigation();
+                    return;
+                }
                 ARouter.getInstance().build(ARouterUtils.TodoPath).navigation();
                 break;
         }

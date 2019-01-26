@@ -14,6 +14,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.wujie.commonmoudle.base.BaseActivity;
 import com.wujie.commonmoudle.presenter.BasePresenter;
 import com.wujie.commonmoudle.utils.ARouterUtils;
+import com.wujie.commonmoudle.utils.Constant;
 import com.wujie.mywanandroid.R;
 
 import butterknife.BindView;
@@ -45,7 +46,7 @@ public class WebViewActivity extends BaseActivity {
 
     @Override
     protected void init() {
-        String webUrl = getIntent().getStringExtra("WebUrl");
+        String webUrl = getIntent().getStringExtra(Constant.WebUrl);
         FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         mWebView = new WebView(getApplicationContext());
         mWebView.setLayoutParams(lp);

@@ -11,6 +11,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.wujie.commonmoudle.utils.ARouterUtils;
 import com.wujie.commonmoudle.utils.CommonUtils;
+import com.wujie.commonmoudle.utils.Constant;
 import com.wujie.mywanandroid.R;
 import com.wujie.mywanandroid.bean.NavigationBean;
 import com.zhy.view.flowlayout.FlowLayout;
@@ -43,7 +44,7 @@ public class NavigationAdapter extends BaseQuickAdapter<NavigationBean, BaseView
             }
         });
         flowLayout.setOnTagClickListener((view, position, parent) -> {
-            ARouter.getInstance().build(ARouterUtils.WebViewPath).withString("WebUrl", item.getArticles().get(position).getLink()).navigation();
+            ARouter.getInstance().build(ARouterUtils.WebViewPath).withString(Constant.WebUrl, item.getArticles().get(position).getLink()).navigation();
             return false;
         });
     }

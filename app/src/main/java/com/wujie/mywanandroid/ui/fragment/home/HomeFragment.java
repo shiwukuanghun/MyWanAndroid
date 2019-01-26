@@ -9,6 +9,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.wujie.commonmoudle.base.BaseFragment;
 import com.wujie.commonmoudle.utils.ARouterUtils;
+import com.wujie.commonmoudle.utils.Constant;
 import com.wujie.mywanandroid.R;
 import com.wujie.mywanandroid.adapter.HomeAdapter;
 import com.wujie.mywanandroid.bean.HomeBean;
@@ -46,26 +47,13 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeContact.View> 
         mHomeAdapter = new HomeAdapter(R.layout.item_home, mDataList);
         mRvHome.setAdapter(mHomeAdapter);
 
-        mHomeAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-            @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                mPresenter.collectOrUnCollectArticle(mHomeAdapter.getData().get(position).getId(), position);
-            }
-        });
+        mHomeAdapter.setOnItemChildClickListener((adapter, view12, position) -> mPresenter.collectOrUnCollectArticle(mHomeAdapter.getData().get(position).getId(), position));
 
-        mHomeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                ARouter.getInstance().build(ARouterUtils.WebViewPath).withString("WebUrl", mHomeAdapter.getData().get(position).getLink()).navigation();
-            }
-        });
+        mHomeAdapter.setOnItemClickListener((adapter, view1, position) -> ARouter.getInstance().build(ARouterUtils.WebViewPath).withString(Constant.WebUrl, mHomeAdapter.getData().get(position).getLink()).navigation());
 
-        mStatusLayout.setOnRetryClickListener(new StatusLayout.OnRetryClickListener() {
-            @Override
-            public void onRetryClick() {
-                mPresenter.getHomeList(0);
-                Toast.makeText(getContext(), "点击重连", Toast.LENGTH_SHORT).show();
-            }
+        mStatusLayout.setOnRetryClickListener(() -> {
+            mPresenter.getHomeList(0);
+            Toast.makeText(getContext(), "点击重连", Toast.LENGTH_SHORT).show();
         });
         mPresenter.getHomeList(0);
     }

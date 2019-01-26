@@ -149,3 +149,7 @@
 ## for DexGuard only
 #-keepresourcexmlelements manifest/application/meta-data@value=GlideModule
 
+
+#banner
+-keep class com.ms.banner.** {*;}
+

@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.squareup.leakcanary.RefWatcher;
+import com.wujie.commonmoudle.BaseApplication;
 import com.wujie.commonmoudle.presenter.BasePresenter;
 import com.wujie.commonmoudle.view.IBaseView;
 
@@ -56,6 +58,8 @@ public abstract class BaseFragment<P extends BasePresenter<V>, V extends IBaseVi
     public void onDestroy() {
         super.onDestroy();
         detachView();
+//        RefWatcher refWatcher = BaseApplication.getRefWatcher(getActivity());
+//        refWatcher.watch(this);
     }
 
     @Override

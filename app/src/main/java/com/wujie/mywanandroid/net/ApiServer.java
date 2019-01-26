@@ -35,6 +35,7 @@ public interface ApiServer {
     @GET("article/list/{page}/json")
     Observable<BaseBean<PageListDataBean<HomeBean>>> getHomeList(@Path("page") int page);
 
+    //轮播图
     @GET("banner/json")
     Observable<BaseBean<List<BannerBean>>> getBanner();
 

@@ -4,11 +4,14 @@ import com.wujie.commonmoudle.net.BaseObserver;
 import com.wujie.commonmoudle.net.RxObserver;
 import com.wujie.commonmoudle.presenter.BasePresenter;
 import com.wujie.commonmoudle.utils.Constant;
+import com.wujie.mywanandroid.bean.BannerBean;
 import com.wujie.mywanandroid.bean.HomeBean;
 import com.wujie.mywanandroid.bean.PageListDataBean;
 import com.wujie.mywanandroid.net.ApiServer;
 import com.wujie.mywanandroid.net.RxHelper;
 import com.wujie.mywanandroid.net.RxRetrofit;
+
+import java.util.List;
 
 /**
  * Time：2019/1/14 0014 上午 9:47
@@ -17,6 +20,31 @@ import com.wujie.mywanandroid.net.RxRetrofit;
  **/
 public class HomePresenter extends BasePresenter<HomeContact.View> implements HomeContact.Presenter {
 
+
+    @Override
+    public void getBanner() {
+        addDisposable(RxRetrofit.getApi()
+                .getBanner()
+                .compose(RxHelper.rxSchedulderHelper())
+                .compose(RxHelper.handleResult2())
+                .subscribeWith(new BaseObserver<List<BannerBean>>() {
+                    @Override
+                    protected void start() {
+
+                    }
+
+                    @Override
+                    protected void onSuccess(List<BannerBean> bannerBeanList) {
+                        mV.getBannerSuccess(bannerBeanList);
+                    }
+
+                    @Override
+                    protected void onFailure(int errorCode, String errorMsg) {
+
+                    }
+                }));
+
+    }
 
     @Override
     public void getHomeList(int page) {

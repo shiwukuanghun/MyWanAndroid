@@ -9,9 +9,11 @@ import android.widget.TextView;
 
 import com.gyf.barlibrary.ImmersionBar;
 import com.gyf.barlibrary.OSUtils;
+import com.squareup.leakcanary.RefWatcher;
 import com.wind.me.xskinloader.SkinInflaterFactory;
 import com.wind.me.xskinloader.SkinManager;
 import com.wind.me.xskinloader.util.AssetFileUtils;
+import com.wujie.commonmoudle.BaseApplication;
 import com.wujie.commonmoudle.R;
 import com.wujie.commonmoudle.presenter.BasePresenter;
 import com.wujie.commonmoudle.view.IBaseView;
@@ -69,6 +71,8 @@ public abstract class BaseActivity<P extends BasePresenter<V>, V extends IBaseVi
             mPresenter.detachView();
         }
         ImmersionBar.with(this).destroy();
+//        RefWatcher refWatcher = BaseApplication.getRefWatcher(this);
+//        refWatcher.watch(this);
     }
 
     public void useNightMode(boolean isNight) {

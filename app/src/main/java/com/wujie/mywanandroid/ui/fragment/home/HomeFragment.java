@@ -1,19 +1,20 @@
 package com.wujie.mywanandroid.ui.fragment.home;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.ms.banner.Banner;
 import com.ms.banner.BannerConfig;
 import com.ms.banner.holder.BannerViewHolder;
-import com.ms.banner.holder.HolderCreator;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.wujie.commonmoudle.GlideApp;
 import com.wujie.commonmoudle.base.BaseFragment;
 import com.wujie.commonmoudle.utils.ARouterUtils;
@@ -23,12 +24,13 @@ import com.wujie.mywanandroid.adapter.HomeAdapter;
 import com.wujie.mywanandroid.bean.BannerBean;
 import com.wujie.mywanandroid.bean.HomeBean;
 import com.wujie.mywanandroid.bean.PageListDataBean;
-import com.wujie.mywanandroid.widget.StatusLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * Time：2019/1/14 0014 上午 9:41
@@ -38,8 +40,9 @@ import butterknife.BindView;
 public class HomeFragment extends BaseFragment<HomePresenter, HomeContact.View> implements HomeContact.View {
     @BindView(R.id.rv_home)
     RecyclerView mRvHome;
-    @BindView(R.id.status_layout)
-    StatusLayout mStatusLayout;
+    @BindView(R.id.srl_home)
+    SmartRefreshLayout mSrlHome;
+    Unbinder unbinder;
     private HomeAdapter mHomeAdapter;
     private List<HomeBean> mDataList;
     private Banner mBanner;
@@ -51,6 +54,7 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeContact.View> 
 
     @Override
     protected void init(View view) {
+        initLoading(mSrlHome);
         mDataList = new ArrayList<>();
         mRvHome.setHasFixedSize(true);
         mRvHome.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -62,10 +66,6 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeContact.View> 
 
         mHomeAdapter.setOnItemClickListener((adapter, view1, position) -> ARouter.getInstance().build(ARouterUtils.WebViewPath).withString(Constant.WebUrl, mHomeAdapter.getData().get(position).getLink()).navigation());
 
-        mStatusLayout.setOnRetryClickListener(() -> {
-            mPresenter.getHomeList(0);
-            Toast.makeText(getContext(), "点击重连", Toast.LENGTH_SHORT).show();
-        });
         mPresenter.getHomeList(0);
     }
 
@@ -83,12 +83,12 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeContact.View> 
 
     @Override
     public void loadHomeFail(String msg) {
-        mStatusLayout.setError();
+//        mStatusLayout.setError();
     }
 
     @Override
     public void loadHomeData(PageListDataBean<HomeBean> pageListDataBean) {
-        mStatusLayout.setContent();
+//        mStatusLayout.setContent();
         List<HomeBean> homeBeans = pageListDataBean.getDatas();
         mDataList.clear();
         mDataList.addAll(homeBeans);

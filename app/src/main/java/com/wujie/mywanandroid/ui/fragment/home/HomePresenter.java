@@ -30,17 +30,18 @@ public class HomePresenter extends BasePresenter<HomeContact.View> implements Ho
                 .subscribeWith(new BaseObserver<List<BannerBean>>() {
                     @Override
                     protected void start() {
-
+                        mV.showLoading("");
                     }
 
                     @Override
                     protected void onSuccess(List<BannerBean> bannerBeanList) {
+                        mV.hideLoading();
                         mV.getBannerSuccess(bannerBeanList);
                     }
 
                     @Override
                     protected void onFailure(int errorCode, String errorMsg) {
-
+                        mV.showError();
                     }
                 }));
 
@@ -51,7 +52,7 @@ public class HomePresenter extends BasePresenter<HomeContact.View> implements Ho
         RxObserver<PageListDataBean<HomeBean>> rxObserver = new RxObserver<PageListDataBean<HomeBean>>(this) {
             @Override
             protected void start() {
-                mV.showLoading("");
+//                mV.showLoading("");
             }
 
             @Override

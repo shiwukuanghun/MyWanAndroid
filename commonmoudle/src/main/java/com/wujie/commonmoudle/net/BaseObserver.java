@@ -29,6 +29,7 @@ public abstract class BaseObserver<T> extends ResourceObserver<T> {
     @Override
     protected void onStart() {
         super.onStart();
+        start();
     }
 
     @Override

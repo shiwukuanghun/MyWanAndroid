@@ -23,17 +23,18 @@ public class NavigationPresenter extends BasePresenter<NavigationContact.View> i
                 .subscribeWith(new BaseObserver<List<NavigationBean>>() {
                     @Override
                     protected void start() {
-
+                        mV.showLoading("");
                     }
 
                     @Override
                     protected void onSuccess(List<NavigationBean> navigationBeans) {
+                        mV.hideLoading();
                         mV.getNavigationSuccess(navigationBeans);
                     }
 
                     @Override
                     protected void onFailure(int errorCode, String errorMsg) {
-
+                        mV.showEmpty();
                     }
                 }));
     }

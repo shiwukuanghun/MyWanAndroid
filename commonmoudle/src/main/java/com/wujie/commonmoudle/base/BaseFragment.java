@@ -6,9 +6,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import com.squareup.leakcanary.RefWatcher;
-import com.wujie.commonmoudle.BaseApplication;
+import com.wujie.commonmoudle.R;
+import com.wujie.commonmoudle.loading.LoadingController;
+import com.wujie.commonmoudle.loading.LoadingInterface;
 import com.wujie.commonmoudle.presenter.BasePresenter;
 import com.wujie.commonmoudle.view.IBaseView;
 
@@ -24,16 +26,19 @@ public abstract class BaseFragment<P extends BasePresenter<V>, V extends IBaseVi
 
     protected P mPresenter;
     Unbinder unbinder;
+    protected LoadingController mLoadingController;
+    private View mView;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(getLayoutId(), container, false);
-        unbinder = ButterKnife.bind(this, view);
+        mView = inflater.inflate(getLayoutId(), container, false);
+        unbinder = ButterKnife.bind(this, mView);
+//        initLoading();
         mPresenter = createPresenter();
         attachView();
-        init(view);
-        return view;
+        init(mView);
+        return mView;
     }
 
     protected abstract int getLayoutId();
@@ -68,28 +73,64 @@ public abstract class BaseFragment<P extends BasePresenter<V>, V extends IBaseVi
         unbinder.unbind();
     }
 
+    protected void initLoading(View view) {
+        mLoadingController = new LoadingController.Builder(getContext(), view)
+                .setLoadingImageResource(R.drawable.loading_frame_anim)
+                .setLoadingMessage("加载中...")
+                .setErrorMessage("网络不给力")
+//                .setEmptyViewImageResource(getEmptyImg())
+//                .setErrorImageResoruce(R.mipmap.net_error)
+                .setEmptyMessage(getEmptyMsg())
+                .setOnNetworkErrorRetryClickListener(() -> {
+
+                })
+                .setOnErrorRetryClickListener("点我重试", () -> retry())
+                .setOnEmptyTodoClickListener(getEmptyTodoText(), () -> emptyTodo())
+                .build();
+    }
+
+    protected View loadingContent() {
+        return mView;
+    }
+
+    protected void retry(){}
+
+    protected String getEmptyMsg() {
+        return "未找到相关内容";
+    }
+
+//    protected int getEmptyImg(){
+//        return R.mipmap.search_empty;
+//    }
+
+    protected String getEmptyTodoText() {
+        return null;
+    }
+
+    protected void emptyTodo() {}
+
     @Override
     public void showLoading(String msg) {
-
+        mLoadingController.showLoading();
     }
 
     @Override
     public void hideLoading() {
-
+        mLoadingController.dismissLoading();
     }
 
     @Override
     public void showError() {
-
+        mLoadingController.showError();
     }
 
     @Override
     public void showFailure(String msg) {
-
+        mLoadingController.showNetworkError();
     }
 
     @Override
     public void showEmpty() {
-
+        mLoadingController.showEmpty();
     }
 }

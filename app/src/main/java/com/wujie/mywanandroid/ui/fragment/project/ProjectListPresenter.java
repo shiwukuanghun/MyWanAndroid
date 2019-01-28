@@ -24,17 +24,18 @@ public class ProjectListPresenter extends BasePresenter<ProjectListContact.View>
                 .subscribeWith(new BaseObserver<PageListDataBean<ProjectItemBean>>() {
                     @Override
                     protected void start() {
-
+                        mV.showLoading("");
                     }
 
                     @Override
                     protected void onSuccess(PageListDataBean<ProjectItemBean> pageListDataBean) {
+                        mV.hideLoading();
                         mV.getProjectList(pageListDataBean);
                     }
 
                     @Override
                     protected void onFailure(int errorCode, String errorMsg) {
-
+                        mV.showError();
                     }
                 }));
     }

@@ -23,17 +23,18 @@ public class KnowledgePresenter extends BasePresenter<KnowledgeContact.View> imp
                 .subscribeWith(new BaseObserver<List<KnowledgeBean>>() {
                     @Override
                     protected void start() {
-
+                        mV.showLoading("");
                     }
 
                     @Override
                     protected void onSuccess(List<KnowledgeBean> knowledgeBeans) {
+                        mV.hideLoading();
                         mV.getKnowledge(knowledgeBeans);
                     }
 
                     @Override
                     protected void onFailure(int errorCode, String errorMsg) {
-
+                        mV.showError();
                     }
                 }));
     }

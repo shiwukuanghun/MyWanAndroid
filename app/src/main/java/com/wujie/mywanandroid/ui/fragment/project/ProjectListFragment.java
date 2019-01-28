@@ -53,6 +53,7 @@ public class ProjectListFragment extends BaseFragment<ProjectListPresenter, Proj
 
     @Override
     protected void init(View view) {
+        initLoading(mSrlProject);
         Bundle bundle = getArguments();
         int id = bundle.getInt("ID");
         mRvProject.setHasFixedSize(true);

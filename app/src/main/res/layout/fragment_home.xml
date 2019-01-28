@@ -4,16 +4,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.wujie.mywanandroid.widget.StatusLayout
-        android:id="@+id/status_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+   <com.scwang.smartrefresh.layout.SmartRefreshLayout
+       android:id="@+id/srl_home"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_home"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+       <android.support.v7.widget.RecyclerView
+           android:id="@+id/rv_home"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"/>
 
-    </com.wujie.mywanandroid.widget.StatusLayout>
+   </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 </LinearLayout>

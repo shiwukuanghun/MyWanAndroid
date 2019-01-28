@@ -24,8 +24,8 @@ import butterknife.Unbinder;
 public class KnowledgeFragment extends BaseFragment<KnowledgePresenter, KnowledgeContact.View> implements KnowledgeContact.View {
     @BindView(R.id.rv_knowledge)
     RecyclerView mRvKnowledge;
-    @BindView(R.id.msl)
-    SmartRefreshLayout mMsl;
+    @BindView(R.id.srl_knowledge)
+    SmartRefreshLayout mSrlKnowledge;
     private KnowledgeAdapter mKnowledgeAdapter;
 
     @Override
@@ -35,6 +35,7 @@ public class KnowledgeFragment extends BaseFragment<KnowledgePresenter, Knowledg
 
     @Override
     protected void init(View view) {
+        initLoading(mSrlKnowledge);
         List<KnowledgeBean> knowledgeBeanList = new ArrayList<>();
         mRvKnowledge.setHasFixedSize(true);
         mRvKnowledge.setLayoutManager(new LinearLayoutManager(getContext()));

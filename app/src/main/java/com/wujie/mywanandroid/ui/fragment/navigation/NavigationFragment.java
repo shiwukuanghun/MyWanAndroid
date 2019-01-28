@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.LinearLayout;
 
 import com.wujie.commonmoudle.base.BaseFragment;
 import com.wujie.mywanandroid.R;
@@ -36,6 +36,9 @@ public class NavigationFragment extends BaseFragment<NavigationPresenter, Naviga
     VerticalTabLayout mVtl;
     @BindView(R.id.rv_navigation)
     RecyclerView mRvNavigation;
+    @BindView(R.id.ll_container)
+    LinearLayout mLlContainer;
+    Unbinder unbinder;
     private NavigationAdapter mNavigationAdapter;
     private LinearLayoutManager mLayoutManager;
 
@@ -46,6 +49,7 @@ public class NavigationFragment extends BaseFragment<NavigationPresenter, Naviga
 
     @Override
     protected void init(View view) {
+        initLoading(mLlContainer);
         List<NavigationBean> list = new ArrayList<>();
         mRvNavigation.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getContext());
@@ -75,7 +79,7 @@ public class NavigationFragment extends BaseFragment<NavigationPresenter, Naviga
             public void onTabSelected(TabView tab, int position) {
                 int firstVisibleItemPosition = mLayoutManager.findFirstVisibleItemPosition();
                 int lastVisibleItemPosition = mLayoutManager.findLastVisibleItemPosition();
-                if (position<firstVisibleItemPosition) {
+                if (position < firstVisibleItemPosition) {
                     mRvNavigation.smoothScrollToPosition(position);
                 } else if (position <= lastVisibleItemPosition) {
                     int top = mRvNavigation.getChildAt(position - firstVisibleItemPosition).getTop();
@@ -99,7 +103,7 @@ public class NavigationFragment extends BaseFragment<NavigationPresenter, Naviga
 
     @Override
     public void getNavigationSuccess(List<NavigationBean> navigationBeanList) {
-        if (navigationBeanList!=null && navigationBeanList.size()>0) {
+        if (navigationBeanList != null && navigationBeanList.size() > 0) {
             mNavigationAdapter.setNewData(navigationBeanList);
             mVtl.setTabAdapter(new TabAdapter() {
                 @Override
@@ -132,4 +136,5 @@ public class NavigationFragment extends BaseFragment<NavigationPresenter, Naviga
             });
         }
     }
+
 }

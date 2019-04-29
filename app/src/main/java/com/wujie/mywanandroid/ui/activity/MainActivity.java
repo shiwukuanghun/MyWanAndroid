@@ -82,6 +82,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         switch (checkedId) {
             case R.id.rb_home:
                 mTvTitle.setText("首页");
+                mIvSearch.setVisibility(View.VISIBLE);
                 if (mHomeFragment == null) {
                     mHomeFragment = new HomeFragment();
                     transaction.add(R.id.fl_container, mHomeFragment, "0");
@@ -92,6 +93,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 break;
             case R.id.rb_knowledge:
                 mTvTitle.setText("知识体系");
+                mIvSearch.setVisibility(View.VISIBLE);
                 if (mKnowledgeFragment == null) {
                     mKnowledgeFragment = new KnowledgeFragment();
                     transaction.add(R.id.fl_container, mKnowledgeFragment, "1");
@@ -102,6 +104,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 break;
             case R.id.rb_navigation:
                 mTvTitle.setText("导航");
+                mIvSearch.setVisibility(View.VISIBLE);
                 if (mNavigationFragment == null) {
                     mNavigationFragment = new NavigationFragment();
                     transaction.add(R.id.fl_container, mNavigationFragment, "2");
@@ -111,6 +114,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 break;
             case R.id.rb_project:
                 mTvTitle.setText("项目");
+                mIvSearch.setVisibility(View.VISIBLE);
                 if (mProjectFragment == null) {
                     mProjectFragment = new ProjectFragment();
                     transaction.add(R.id.fl_container, mProjectFragment, "3");

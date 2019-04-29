@@ -24,6 +24,7 @@ public class BasePresenter<V extends IBaseView> implements IPresenter<V> {
     @Override
     public void detachView() {
          mV = null;
+         removeAllDisposable();
     }
 
     @Override

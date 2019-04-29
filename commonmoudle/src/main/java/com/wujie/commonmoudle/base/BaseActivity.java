@@ -72,7 +72,6 @@ public abstract class BaseActivity<P extends BasePresenter<V>, V extends IBaseVi
         super.onDestroy();
         if (null != mPresenter) {
             mPresenter.detachView();
-            mPresenter.detachView();
         }
         ImmersionBar.with(this).destroy();
 //        RefWatcher refWatcher = BaseApplication.getRefWatcher(this);

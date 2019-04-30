@@ -106,4 +106,7 @@ dependencies {
 
     //banner
     api 'com.github.wenchaosong:Banner:2.2.9'
+
+    //rxBinding
+    api 'com.jakewharton.rxbinding3:rxbinding:3.0.0-alpha2'
 }

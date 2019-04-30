@@ -24,6 +24,8 @@ import com.wujie.commonmoudle.view.IBaseView;
 import java.io.File;
 
 import butterknife.ButterKnife;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 
 /**
@@ -36,6 +38,7 @@ public abstract class BaseActivity<P extends BasePresenter<V>, V extends IBaseVi
     protected P mPresenter;
     protected Context mContext;
     protected LoadingController mLoadingController2;
+    protected CompositeDisposable mCompositeDisposable;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,9 +70,23 @@ public abstract class BaseActivity<P extends BasePresenter<V>, V extends IBaseVi
                 .init();
     }
 
+    protected void addDisposable(Disposable disposable) {
+        if (mCompositeDisposable == null) {
+            mCompositeDisposable = new CompositeDisposable();
+        }
+        mCompositeDisposable.add(disposable);
+    }
+
+    protected void clearDisposable() {
+        if (mCompositeDisposable != null) {
+            mCompositeDisposable.clear();
+        }
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        clearDisposable();
         if (null != mPresenter) {
             mPresenter.detachView();
         }

@@ -3,6 +3,7 @@ package com.wujie.mywanandroid.ui.activity.login;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,6 +11,8 @@ import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.gyf.barlibrary.ImmersionBar;
+import com.jakewharton.rxbinding3.InitialValueObservable;
+import com.jakewharton.rxbinding3.widget.RxTextView;
 import com.wind.me.xskinloader.SkinInflaterFactory;
 import com.wind.me.xskinloader.SkinManager;
 import com.wind.me.xskinloader.util.AssetFileUtils;
@@ -22,6 +25,9 @@ import java.io.File;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.Observable;
+import io.reactivex.functions.BiFunction;
+import io.reactivex.functions.Consumer;
 
 /**
  * Time：2019/1/14 0014 上午 10:10
@@ -76,15 +82,18 @@ public class LoginActivity extends BaseActivity<LoginPresenter, LoginContact.Vie
 
     @OnClick(R.id.btn_login)
     public void onViewClicked() {
-        if (isEmpty(mEtName)) {
-            Toast.makeText(mContext, "用户名不能为空", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (isEmpty(mEtPwd)) {
-            Toast.makeText(mContext, "密码不能为空", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        mPresenter.login(getText(mEtName), getText(mEtPwd));
+        InitialValueObservable<CharSequence> nameObservable = RxTextView.textChanges(mEtName);
+        InitialValueObservable<CharSequence> pwdObservable = RxTextView.textChanges(mEtPwd);
+        addDisposable(Observable.combineLatest(nameObservable, pwdObservable, (charSequence, charSequence2) -> TextUtils.isEmpty(charSequence)&&TextUtils.isEmpty(charSequence2)).subscribe(new Consumer<Boolean>() {
+            @Override
+            public void accept(Boolean aBoolean) throws Exception {
+                if (aBoolean) {
+                    Toast.makeText(mContext, "用户名或密码不能为空", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                mPresenter.login(getText(mEtName), getText(mEtPwd));
+            }
+        }));
 /*        if (mFlag) {
 //            changeSkin();
             useNightMode(true);

@@ -88,6 +88,11 @@ android {
         }
     }
 
+    //过滤掉提示重复的文件,加了rxBinding后出现的，出现类似问题照此办
+    packagingOptions {
+        exclude 'META-INF/proguard/androidx-annotations.pro'
+    }
+
 }
 
 dependencies {

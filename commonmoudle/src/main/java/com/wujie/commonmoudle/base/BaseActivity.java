@@ -1,7 +1,6 @@
 package com.wujie.commonmoudle.base;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -9,12 +8,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.gyf.barlibrary.ImmersionBar;
-import com.gyf.barlibrary.OSUtils;
-import com.squareup.leakcanary.RefWatcher;
 import com.wind.me.xskinloader.SkinInflaterFactory;
 import com.wind.me.xskinloader.SkinManager;
 import com.wind.me.xskinloader.util.AssetFileUtils;
-import com.wujie.commonmoudle.BaseApplication;
 import com.wujie.commonmoudle.R;
 import com.wujie.commonmoudle.loading.LoadingController;
 import com.wujie.commonmoudle.loading.LoadingInterface;
@@ -37,7 +33,7 @@ public abstract class BaseActivity<P extends BasePresenter<V>, V extends IBaseVi
 
     protected P mPresenter;
     protected Context mContext;
-    protected LoadingController mLoadingController2;
+    protected LoadingController mLoadingController;
     protected CompositeDisposable mCompositeDisposable;
 
     @Override
@@ -123,7 +119,7 @@ public abstract class BaseActivity<P extends BasePresenter<V>, V extends IBaseVi
     }
 
     protected void initLoading(View view) {
-        mLoadingController2 = new LoadingController.Builder(this, view)
+        mLoadingController = new LoadingController.Builder(this, view)
 //                .setLoadingImageResource(R.drawable.common_loading_frame_anim)
                 .setLoadingMessage("加载中...")
                 .setErrorMessage("网络不给力")

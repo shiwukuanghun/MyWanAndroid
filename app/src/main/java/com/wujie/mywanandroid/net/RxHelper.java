@@ -72,6 +72,7 @@ public class RxHelper {
                         if (tBaseBean.getErrorCode() == NetConfig.REQUEST_SUCCESS) {
                             PageListDataBean<HomeBean> pageListDataBean = new PageListDataBean<>();
                             tBaseBean.setData((T) pageListDataBean);
+                            //创建一个非空数据源，避免onNext()传入null
                             return createData(tBaseBean.getData());
                         } else {
                             return Observable.error(new OtherException(tBaseBean.getErrorCode(), tBaseBean.getErrorMsg()));

@@ -1,12 +1,11 @@
 package com.wujie.mywanandroid.ui.fragment.home;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -14,6 +13,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.ms.banner.Banner;
 import com.ms.banner.BannerConfig;
 import com.ms.banner.holder.BannerViewHolder;
+import com.ms.banner.holder.HolderCreator;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.wujie.commonmoudle.GlideApp;
 import com.wujie.commonmoudle.base.BaseFragment;
@@ -29,7 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
@@ -114,7 +113,12 @@ public class HomeFragment extends BaseFragment<HomePresenter, HomeContact.View> 
             for (int i = 0; i < bannerBeanList.size(); i++) {
                 uriList.add(bannerBeanList.get(i).getImagePath());
             }
-            mBanner.setPages(uriList, () -> new CustomViewHolder())
+            mBanner.setPages(uriList, new HolderCreator<BannerViewHolder>() {
+                @Override
+                public BannerViewHolder createViewHolder() {
+                    return new CustomViewHolder();
+                }
+            })
                     .setAutoPlay(true)
                     .setBannerStyle(BannerConfig.CUSTOM_INDICATOR)
                     .start();

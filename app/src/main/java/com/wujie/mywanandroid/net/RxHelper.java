@@ -52,12 +52,15 @@ public class RxHelper {
 
     public static <T> ObservableTransformer<BaseBean<T>, T> handleResult2() {
         return httpResponseObservable ->
-                httpResponseObservable.flatMap((Function<BaseBean<T>, Observable<T>>) baseResponse -> {
-                    if(baseResponse.getErrorCode() == 0
-                            && baseResponse.getData() != null) {
-                        return createData(baseResponse.getData());
-                    } else {
-                        return Observable.error(new OtherException(baseResponse.getErrorCode(), baseResponse.getErrorMsg()));
+                httpResponseObservable.flatMap((Function<BaseBean<T>, Observable<T>>) new Function<BaseBean<T>, Observable<T>>() {
+                    @Override
+                    public Observable<T> apply(BaseBean<T> baseResponse) throws Exception {
+                        if (baseResponse.getErrorCode() == 0
+                                && baseResponse.getData() != null) {
+                            return createData(baseResponse.getData());
+                        } else {
+                            return Observable.error(new OtherException(baseResponse.getErrorCode(), baseResponse.getErrorMsg()));
+                        }
                     }
                 });
     }

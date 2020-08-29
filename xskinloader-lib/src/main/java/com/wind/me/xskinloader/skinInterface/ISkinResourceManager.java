@@ -3,8 +3,8 @@ package com.wind.me.xskinloader.skinInterface;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.ColorRes;
-import android.support.annotation.DrawableRes;
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
 
 /**
  * Created by xiawanli on 2018/1/10.

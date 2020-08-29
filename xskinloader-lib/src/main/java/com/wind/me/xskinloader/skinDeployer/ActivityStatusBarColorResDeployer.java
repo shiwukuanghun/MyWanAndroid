@@ -1,7 +1,7 @@
 package com.wind.me.xskinloader.skinDeployer;
 
 import android.os.Build;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 import android.view.View;
 import android.view.Window;
 

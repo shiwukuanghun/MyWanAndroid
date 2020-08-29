@@ -2,7 +2,7 @@ package com.wind.me.xskinloader.skinDeployer;
 
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 import android.view.View;
 
 import com.wind.me.xskinloader.entity.SkinAttr;

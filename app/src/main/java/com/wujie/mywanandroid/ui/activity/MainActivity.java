@@ -1,8 +1,7 @@
 package com.wujie.mywanandroid.ui.activity;
 
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -25,7 +24,6 @@ import com.wujie.mywanandroid.ui.fragment.project.ProjectFragment;
 import java.io.File;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener {
 
@@ -66,7 +64,7 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
     @Override
     protected void init() {
-        ImmersionBar.with(this).transparentBar().init();
+        ImmersionBar.with(this).init();
         mRgContainer.setOnCheckedChangeListener(this);
         mRgContainer.check(R.id.rb_home);
     }

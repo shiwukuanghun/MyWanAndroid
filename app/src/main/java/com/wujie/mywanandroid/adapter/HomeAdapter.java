@@ -1,12 +1,10 @@
 package com.wujie.mywanandroid.adapter;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.wind.me.xskinloader.SkinManager;
 import com.wujie.mywanandroid.R;
 import com.wujie.mywanandroid.bean.HomeBean;
 

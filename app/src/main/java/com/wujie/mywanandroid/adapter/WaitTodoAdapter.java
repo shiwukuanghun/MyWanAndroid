@@ -1,12 +1,8 @@
 package com.wujie.mywanandroid.adapter;
 
-import android.support.annotation.Nullable;
-
-import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseSectionQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.wujie.mywanandroid.R;
-import com.wujie.mywanandroid.bean.TodoBean;
 import com.wujie.mywanandroid.bean.TodoSection;
 
 import java.util.List;
